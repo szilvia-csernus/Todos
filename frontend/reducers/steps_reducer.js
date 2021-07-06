@@ -17,19 +17,19 @@ const initialSteps = {
 
 const stepsReducer = (state = initialSteps, action) => {
     let new_steps = {};
+    Object.freeze(state);
+    
     switch (action.type) {
         case RECEIVE_STEPS:
             action.steps.forEach(step => {
                 new_steps[step.id] = step;
             })
             return new_steps;
-        case RECEIVE_STEP:
-            Object.freeze(state);
+        case RECEIVE_STEP:        
             new_steps = JSON.parse(JSON.stringify(state));
             new_steps[action.step.id] = action.step;
             return new_steps;
         case REMOVE_STEP:
-            Object.freeze(state);
             new_steps = JSON.parse(JSON.stringify(state));
             delete new_steps[action.step.id];
             return new_steps;

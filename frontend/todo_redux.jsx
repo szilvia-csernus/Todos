@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import Root from './components/root';
 import configureStore from './store/store';
+import { allTodos } from './reducers/selectors';
 import { receiveTodo, receiveTodos, removeTodo } from './actions/todo_actions';
 import { receiveSteps, receiveStep, removeStep  } from './actions/step_actions';
 
@@ -15,20 +16,17 @@ window.removeTodo = removeTodo;
 window.receiveSteps = receiveSteps;
 window.receiveStep = receiveStep;
 window.removeStep = removeStep;
+window.allTodos = allTodos;
 
 // window.addOrange = addOrange;
 // window.addApple = addApple;
 // window.clearFruit = clearFruit;
 
-const App = () => (
-    <div>
-        <h1>TODOs App</h1>
-    </div>
-);
+
 
 document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(
-        <App />,
+        <Root store={configureStore}/>,
         document.getElementById('content')
     );
 });

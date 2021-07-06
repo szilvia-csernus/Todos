@@ -17,6 +17,8 @@ const initialState = {
 
 const todosReducer = (state = initialState, action) => {
     let new_todos = {};
+    Object.freeze(state);
+
     switch (action.type) {
         case RECEIVE_TODOS:
             action.todos.forEach(todo => {
@@ -24,12 +26,9 @@ const todosReducer = (state = initialState, action) => {
             })
             return new_todos;
         case RECEIVE_TODO:
-            Object.freeze(state);
-            new_todos = JSON.parse(JSON.stringify(state));
-            new_todos[action.todo.id] = action.todo;
-            return new_todos;
+            const newTodo = { [action.todo.id]: action.todo };
+            return Object.assign({}, state, newTodo);
         case REMOVE_TODO:
-            Object.freeze(state);
             new_todos = JSON.parse(JSON.stringify(state));
             delete new_todos[action.todo.id];
             return new_todos;
