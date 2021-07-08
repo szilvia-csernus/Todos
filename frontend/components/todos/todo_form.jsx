@@ -21,10 +21,11 @@ class TodoForm extends React.Component {
 
     render() {
         return (
-        <div>
-            <form className="form" onSubmit={this.handleSubmit}>
-
+        <div className="todo-list-item">
+            
+            <form  onSubmit={this.handleSubmit}>
                     <fieldset className="form-fieldset">
+                        <h3>New Todo</h3>
                         <label className="input">Title:
                             <input 
                                 ref="title"

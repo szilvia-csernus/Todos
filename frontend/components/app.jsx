@@ -2,10 +2,10 @@ import React from 'react';
 import TodoListContainer from './todos/todo_list_container';
 
 const App = () => (
-    <div>
-        <h1>TODOs App</h1>
+    <main>
+        <h1>TODO List</h1>
         <TodoListContainer />
-    </div>
+    </main>
 );
 
 export default App;

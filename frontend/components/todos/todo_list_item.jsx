@@ -1,12 +1,10 @@
 import React from 'react';
-import TodoDetailView from './todo_detail_view';
+import TodoDetailViewContainer from './todo_detail_view_container';
 
 class TodoListItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {detail: false};
-        // this.toggleTodo = this.toggleTodo.bind(this);
-        // this.toggleDetail = this.toggleDetail.bind(this);
     }
 
     toggleDetail = (event) => {
@@ -21,17 +19,23 @@ class TodoListItem extends React.Component {
     }
 
     render() {
-        const { className, todo, receiveTodo, removeTodo } = this.props;
+        const { todo } = this.props;
         let details;
         if (this.state.detail) {
-            details = <TodoDetailView todo={todo} toggleTodo={this.toggleTodo} removeTodo={removeTodo} />;
+            details = <TodoDetailViewContainer todo={todo} />;
         }
         return (
             <div>
-                <li className={className}>
-                    <p><a onClick={this.toggleDetail}>{todo.title}</a></p>
-                    <p>Status: {todo.done ? "Done" : "Pending"}</p>
-                    { details }
+                <li className="todo-list-item">
+                    <div>
+                        <h3 ><a onClick={this.toggleDetail}>{todo.title}</a></h3>
+                        {details}
+                    </div>
+                    <div className="list-item-status">
+                        <p >Status: {todo.done ? "Done" : "Pending"}</p>
+                        <button onClick={this.toggleTodo}>{todo.done ? "Undo" : "Done"}</button>
+                    </div>
+                    
                 </li>
             </div>
         )
